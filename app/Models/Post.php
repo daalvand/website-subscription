@@ -23,7 +23,6 @@ class Post extends Model
 
     public function getUrlAttribute(): string
     {
-        // Replace 'website.com' with the base URL of your websites
         return  $this->website->url . '/posts/' . $this->id;
     }
 
