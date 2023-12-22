@@ -2,12 +2,13 @@
 
 namespace App\Console\Commands;
 
-use App\Events\PostCreated;
+use App\Contracts\PostEmailService;
 use App\Models\Post;
 use Illuminate\Console\Command;
 
 class SendPostEmailsCommand extends Command
 {
+    public const NEW_POSTS_DURATION = 600;
     /**
      * The name and signature of the console command.
      *
@@ -25,11 +26,14 @@ class SendPostEmailsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(): void
+    public function handle(PostEmailService $service): void
     {
-        $posts = Post::latest()->whereDoesntHave('sentToSubscriptions')->get();
+        $posts = Post::latest()
+            ->where('created_at', '>=', now()->subSeconds(self::NEW_POSTS_DURATION))
+            ->get();
+
         foreach ($posts as $post) {
-            event(new PostCreated($post));
+            $service->sendEmailsForPost($post);
         }
     }
 }

@@ -17,6 +17,7 @@ class SendPostEmailJob implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public const DEFAULT_QUEUE_NAME = 'send_post_email_job';
     private Post $post;
     private Subscription $subscription;
 
@@ -24,11 +25,12 @@ class SendPostEmailJob implements ShouldQueue, ShouldBeUnique
     {
         $this->post = $post;
         $this->subscription = $subscription;
+        $this->onQueue(self::DEFAULT_QUEUE_NAME);
     }
 
     public function handle(): void
     {
-        Mail::to($this->subscription->email)->queue(new PostPublished($this->post));
+        Mail::to($this->subscription->email)->send(new PostPublished($this->post));
         $this->post->sentToSubscriptions()->attach($this->subscription->id, ['sent_at' => now()]);
     }
 

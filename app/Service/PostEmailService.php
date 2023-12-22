@@ -6,19 +6,34 @@ use App\Contracts\PostEmailService as PostEmailServiceContract;
 use App\Jobs\SendPostEmailJob;
 use App\Models\Post;
 use App\Models\Subscription;
-
+use Illuminate\Support\Collection;
 
 class PostEmailService implements PostEmailServiceContract
 {
-
     /**
      * @inheritDoc
      */
     public function sendEmailsForPost(Post $post): void
     {
-        foreach ($post->website->subscriptions as $subscription) {
+        $subscriptions = $this->getUnsentSubscriptions($post);
+        foreach ($subscriptions as $subscription) {
             $this->sendEmailForSubscription($post, $subscription);
         }
+    }
+
+    /**
+     * Get unsent subscriptions for the given post.
+     *
+     * @param Post $post
+     * @return Collection
+     */
+    private function getUnsentSubscriptions(Post $post): Collection
+    {
+        $allSubscriptions = $post->website->subscriptions;
+        $sentSubscriptions = $post->sentToSubscriptions;
+        return $allSubscriptions->reject(function ($subscription) use ($sentSubscriptions) {
+            return $sentSubscriptions->contains('id', $subscription->id);
+        });
     }
 
     /**
