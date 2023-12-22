@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('post_email_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')->constrained('posts');
-            $table->foreignId('subscriber_id')->constrained('subscribers');
-            $table->unique(['post_id', 'subscriber_id']);
+            $table->foreignId('subscription_id')->constrained('subscriptions');
+            $table->unique(['post_id', 'subscription_id']);
             $table->timestamp('sent_at');
             $table->timestamps();
         });

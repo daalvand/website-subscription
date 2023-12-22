@@ -17,8 +17,8 @@ class Website extends Model
         return $this->hasMany(Post::class);
     }
 
-    public function subscribers(): HasMany
+    public function subscriptions(): HasMany
     {
-        return $this->hasMany(Subscriber::class);
+        return $this->hasMany(Subscription::class);
     }
 }

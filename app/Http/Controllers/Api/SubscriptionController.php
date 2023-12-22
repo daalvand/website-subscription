@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
     public function store(Store $request, Website $website): JsonResponse
     {
         $validated = $request->validated();
-        $subscription = $website->subscribers()->create([
+        $subscription = $website->subscriptions()->create([
             'email' => $validated['email']
         ]);
 
