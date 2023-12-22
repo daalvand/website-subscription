@@ -34,15 +34,16 @@ This is a simple subscription platform implemented in Laravel, allowing users to
 
 ### API Endpoints
 
-- **Create Post for a Website:**
+- **Create a Post for a Website:**
   ```http
   POST /api/websites/{website}/posts
   ```
 
-- **Subscribe User to a Website:**
+- **Subscribe a User to a Website:**
   ```http
   POST /api/websites/{website}/subscriptions
   ```
+  For running these endpoints, import the Postman collection from the following link: [Postman Collection](./postman_collection.json).
 
 ### Artisan Command
 

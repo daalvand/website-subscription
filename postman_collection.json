@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "660d69b3-d39f-483c-8ba8-8a7b61ef65d9",
+		"name": "1-website-subscription",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2980597",
+		"_collection_link": "https://cloudy-astronaut-371870.postman.co/workspace/My-Workspace~e4f07138-02d0-403d-8ea2-617206da25c2/collection/2980597-660d69b3-d39f-483c-8ba8-8a7b61ef65d9?action=share&source=collection_link&creator=2980597"
+	},
+	"item": [
+		{
+			"name": "new post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"test\",\r\n    \"description\": \"test test test test test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/websites/:website/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"websites",
+						":website",
+						"posts"
+					],
+					"variable": [
+						{
+							"key": "website",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new subscription",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"mdaalvand@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/websites/:website/subscriptions",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"websites",
+						":website",
+						"subscriptions"
+					],
+					"variable": [
+						{
+							"key": "website",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
