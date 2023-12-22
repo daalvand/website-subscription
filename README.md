@@ -49,5 +49,5 @@ This is a simple subscription platform implemented in Laravel, allowing users to
 
 - **Send Emails for New Posts:**
   ```bash
-  php artisan email:send-posts
+  php artisan email:send-posts-command
   ```
